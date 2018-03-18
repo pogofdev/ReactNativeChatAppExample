@@ -13,7 +13,8 @@ class Main extends React.Component {
         this.state = {
             messages: [],
             userId: username,
-            chatId: roomName
+            roomName
+
         };
 
 
@@ -22,9 +23,9 @@ class Main extends React.Component {
         this.onSend = this.onSend.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = SocketIOClient('http://192.168.1.2:4000');
+        this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
 
-        this.socket.on(`${roomName}/message`, this.onReceivedMessage);
+        this.socket.on(`message`, this.onReceivedMessage);
         this.socket.on('server message', this.onReceivedMessage);
         // this.determineUser();
 
@@ -32,7 +33,7 @@ class Main extends React.Component {
     }
 
     joinServer = (username, roomName) => {
-        this.socket.emit('userJoined', {userId:username,chatId:roomName});
+        this.socket.emit('userJoined', {userId:username,roomName});
     };
 
     /**
@@ -72,8 +73,8 @@ class Main extends React.Component {
      * and store it in this component's state.
      */
     onSend(messages=[]) {
-        const {chatId} = this.state;
-        this.socket.emit('message', {chatId,message:messages[0]});
+        const {roomName} = this.state;
+        this.socket.emit('message', {roomName,message:messages[0]});
         this._storeMessages(messages);
     }
 
