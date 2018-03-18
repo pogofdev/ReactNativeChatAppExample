@@ -24,12 +24,17 @@ class Main extends React.Component {
         this._storeMessages = this._storeMessages.bind(this);
 
         this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
+        // this.socket = SocketIOClient('http://192.168.1.2:3000/mychat');
+        this.socket.on('connect',()=>{this.joinServer(username,roomName)});
 
         this.socket.on(`message`, this.onReceivedMessage);
+        this.socket.on(`receivedAllMessages`, (messages) => {
+                this.setState({messages});
+        });
         this.socket.on('server message', this.onReceivedMessage);
         // this.determineUser();
 
-        this.joinServer(username,roomName);
+        // this.joinServer(username,roomName);
     }
 
     joinServer = (username, roomName) => {
