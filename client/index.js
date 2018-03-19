@@ -4,6 +4,7 @@ import {View, Text, AsyncStorage, Image} from 'react-native';
 import SocketIOClient from 'socket.io-client/dist/socket.io';
 import { GiftedChat,Bubble } from 'react-native-gifted-chat';
 import XandyMessage from "./XandyMessage/XandyMessage";
+import XandyBubble from "./XandyMessage/XandyBubble";
 
 const USER_ID = '@userId';
 
@@ -84,16 +85,15 @@ class Main extends React.Component {
         this._storeMessages(messages);
     }
 
-    renderBubble(props) {
+    renderBubble = (props) => {
+        const {currentMessage:{text}} = props;
+        console.log(props);
         return (
-            <Bubble
+            <XandyBubble
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: '#ddd',
-                    },
-                    right:{
-                        backgroundColor: 'red',
+                        backgroundColor: '#f0f0f0',
                     }
                 }}
             />
@@ -113,6 +113,7 @@ class Main extends React.Component {
                 onSend={this.onSend}
                 user={user}
                 isAnimated={true}//Animates the view when the keyboard appears
+                renderBubble={this.renderBubble}
                 // renderAvatar={(props)=><Image
                 //     style={{width: 50, height: 50}}
                 //     source={{uri: props.currentMessage.user.avatar}}
@@ -123,6 +124,7 @@ class Main extends React.Component {
             />
         );
     }
+
 
 
 

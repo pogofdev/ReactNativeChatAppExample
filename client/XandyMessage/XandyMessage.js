@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { Avatar, Day, utils } from 'react-native-gifted-chat';
-import XandyBupple from './XandyBupple';
+import XandyBupple from './XandyBubble';
 import PropTypes from 'prop-types';
 
 const { isSameUser, isSameDay } = utils;
