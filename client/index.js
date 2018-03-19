@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import {View, Text, AsyncStorage, Image} from 'react-native';
 // import SocketIOClient from 'socket.io-client';
 import SocketIOClient from 'socket.io-client/dist/socket.io';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat,Bubble } from 'react-native-gifted-chat';
+import XandyMessage from "./XandyMessage/XandyMessage";
 
 const USER_ID = '@userId';
 
@@ -23,8 +24,8 @@ class Main extends React.Component {
         this.onSend = this.onSend.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
-        // this.socket = SocketIOClient('http://192.168.1.2:3000/mychat');
+        // this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
+        this.socket = SocketIOClient('http://192.168.1.8:3000/mychat');
         this.socket.on('connect',()=>{this.joinServer(username,roomName)});
 
         this.socket.on(`message`, this.onReceivedMessage);
@@ -83,17 +84,47 @@ class Main extends React.Component {
         this._storeMessages(messages);
     }
 
+    renderBubble(props) {
+        return (
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: '#ddd',
+                    },
+                    right:{
+                        backgroundColor: 'red',
+                    }
+                }}
+            />
+        );
+    }
+
     render() {
-        var user = { _id: this.state.userId || -1 };
+        var user = {
+            _id: this.state.userId || -1 ,
+            name: this.state.userId,
+            avatar:'https://facebook.github.io/react-native/docs/assets/favicon.png'
+        };
 
         return (
             <GiftedChat
                 messages={this.state.messages}
                 onSend={this.onSend}
                 user={user}
+                isAnimated={true}//Animates the view when the keyboard appears
+                // renderAvatar={(props)=><Image
+                //     style={{width: 50, height: 50}}
+                //     source={{uri: props.currentMessage.user.avatar}}
+                // />}
+                // renderAvatar={(props)=>console.log(props)}
+
+
             />
         );
     }
+
+
 
     // Helper functions
     _storeMessages(messages) {
