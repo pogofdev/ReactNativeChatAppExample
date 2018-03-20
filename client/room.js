@@ -17,6 +17,11 @@ class RoomSelection extends React.Component {
         this.props.navigation.navigate('ChatRoom',{username,roomName})
     };
 
+    _onPressSlotMachine = () => {
+        const {username,roomName} = this.state;
+        this.props.navigation.navigate('SlotMachine',{username,roomName})
+    };
+
     render() {
         return (
             <View style={{ flex: 1}}>
@@ -41,7 +46,13 @@ class RoomSelection extends React.Component {
 
                     <Button
                         onPress={this._onPress}
-                        title="Learn More"
+                        title="Go to chat room"
+                        color="#841584"
+                        accessibilityLabel="Learn more about this purple button"
+                    />
+                    <Button
+                        onPress={this._onPressSlotMachine}
+                        title="Go to Slot Machine"
                         color="#841584"
                         accessibilityLabel="Learn more about this purple button"
                     />

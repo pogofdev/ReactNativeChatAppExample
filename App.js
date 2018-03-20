@@ -15,6 +15,7 @@ import {StackNavigator} from 'react-navigation';
 import room from "./client/room";
 import index from "./client/index";
 import OneSignal from "react-native-onesignal";
+import SlotMachine from "./client/SlotMachine";
 
 
 const Rootstack = StackNavigator(
@@ -25,9 +26,12 @@ const Rootstack = StackNavigator(
         ChatRoom: {
             screen: index
         },
+        SlotMachine: {
+            screen: SlotMachine
+        },
     },
     {
-        initialRouteName: 'RoomSelection',
+        initialRouteName: 'SlotMachine',
         headerMode:'none'
     }
 );
