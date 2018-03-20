@@ -25,8 +25,8 @@ class Main extends React.Component {
         this.onSend = this.onSend.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        // this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
-        this.socket = SocketIOClient('http://192.168.1.8:3000/mychat');
+        this.socket = SocketIOClient('https://rocky-hamlet-71418.herokuapp.com/mychat');
+        // this.socket = SocketIOClient('http://192.168.1.8:3000/mychat');
         this.socket.on('connect',()=>{this.joinServer(username,roomName)});
 
         this.socket.on(`message`, this.onReceivedMessage);
@@ -89,7 +89,7 @@ class Main extends React.Component {
         const {currentMessage:{text}} = props;
         console.log(props);
         return (
-            <XandyBubble
+            <Bubble
                 {...props}
                 wrapperStyle={{
                     left: {

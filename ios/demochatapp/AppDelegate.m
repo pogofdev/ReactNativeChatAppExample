@@ -29,7 +29,7 @@
 //  OneSignal
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                                                          appId:@"20e303b9-a8b0-456d-8b31-90a189c1774f"
-                                                      settings:@{kOSSettingsKeyAutoPrompt: @false}];
+                                                      settings:@{kOSSettingsKeyAutoPrompt: @true}];
   
   
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
